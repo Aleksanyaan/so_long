@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:08:26 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/17 19:58:06 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/18 12:40:04 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,30 @@ char	*trim_newline(char *line)
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
 	return (line);
+}
+
+int	char_count(char **map, char c)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == c)
+			{
+				count++;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }
 
 // void	free_map(t_map *map)

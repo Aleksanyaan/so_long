@@ -1,5 +1,13 @@
 #include "../includes/so_long.h"
 
+int	is_map_valid(char **map)
+{
+	if(!check_valid_chars(map) || !check_char_count(map)
+		|| !check_rectangular(map) || !check_is_map_surrounded_by_walls(map))
+		return (0);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -19,9 +27,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
-	if (!check_valid_chars(map))
+	if (!is_map_valid(map))
 	{
-		printf("Error: Map is not rectangular\n");
+		write(1, "Error: Map is not valid!\n", 25);
 		i = 0;
 		while (map[i])
 		{
@@ -31,9 +39,7 @@ int	main(int argc, char **argv)
 		free(map);
 		return (1);
 	}
-	else 
-		printf("1");
-
+		
 	// i = 0;
 	// while(map[i] != NULL)
 	// {

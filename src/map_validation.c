@@ -8,7 +8,6 @@ int	check_rectangular(char **map)
 	if (!map || !map[0])
 		return (0);
 	first_len = ft_strlen(map[0]);
-
 	i = 1;
 	while (map[i])
 	{
@@ -32,7 +31,7 @@ int	check_valid_chars(char **map)
 		{
 			if (!check_char(map[i][j]))
 			{
-				printf("Invalid character found: %c\n", map[i][j]);
+				write(1, "Invalid character found!", 24);
 				return (0);
 			}
 			j++;
@@ -42,3 +41,38 @@ int	check_valid_chars(char **map)
 	return (1);
 }
 
+int	check_char_count(char **map)
+{
+	if (char_count(map, 'E') != 1 || char_count(map, 'P') != 1
+		|| char_count(map, 'C') < 1)
+		return (0);
+	return (1);
+}
+
+int	check_is_map_surrounded_by_walls(char **map)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (map[0][j])
+	{
+		if (map[0][j++] != '1')
+			return (0);
+	}
+	i = 1;
+	while (map[i + 1])
+	{
+		j = ft_strlen(map[i]);
+		if (map[i][0] != '1' || map[i][j - 1] != '1')
+			return (0);
+		i++;
+	}
+	j = 0;
+	while (map[i][j])
+	{
+		if (map[i][j++] != '1')
+			return (0);
+	}
+	return (1);
+}
