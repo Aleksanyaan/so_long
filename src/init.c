@@ -1,6 +1,5 @@
 #include "../includes/so_long.h"
 
-
 int	count_lines(char *filepath)
 {
 	char	*line;
@@ -49,4 +48,27 @@ char	**read_file_to_array(char *filepath)
 	lines[i] = NULL;
 	close (fd);
 	return (lines);
+}
+
+void	init_player_position(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (game->map->map[i])
+	{
+		j = 0;
+		while (game->map->map[i][j])
+		{
+			if (game->map->map[i][j] == 'P')
+			{
+				game->player->x = j;
+				game->player->y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }

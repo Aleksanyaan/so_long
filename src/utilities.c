@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:08:26 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/18 12:40:04 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:39:46 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,6 @@ void	error_return(int er, int fd, char *temp, char c)
 	}
 }
 
-void	free_matrix(int **mat, int rows)
-{
-	int	i;
-
-	i = 0;
-	while (i < rows)
-		free(mat[i++]);
-	free(mat);
-}
-
 char	*trim_newline(char *line)
 {
 	int	len;
@@ -91,11 +81,17 @@ int	char_count(char **map, char c)
 	return (count);
 }
 
-// void	free_map(t_map *map)
-// {
-// 	if (map)
-// 	{
-// 		matrix_free(map->mat, map->rc[0]);
-// 		free(map);
-// 	}
-// }
+void	free_map(char **map)
+{
+	int	i;
+
+	if (!map)
+		return;
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
