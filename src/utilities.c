@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:08:26 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/20 14:41:04 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:11:08 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,6 @@ int	check_char(int c)
 		|| c == 'P' || c == 'E')
 		return (1);
 	return (0);
-}
-
-void	error_return(int er, int fd, char *temp, char c)
-{
-	if (er == 1)
-	{
-		perror("Invalid Map");
-		exit(1);
-	}
-	if (er == 2)
-	{
-		close (fd);
-		printf("Invalid Char found : '%c' \n", c);
-		if (temp)
-			free(temp);
-		exit(1);
-	}
-	if (er == 3)
-	{
-		close (fd);
-		printf("Invalid Map \n");
-		if (temp)
-			free(temp);
-		exit(1);
-	}
 }
 
 char	*trim_newline(char *line)

@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:09:53 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/20 15:11:33 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:45:04 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,4 @@ void	free_all(t_game *game)
 	free(game->player);
 	free(game->img);
 	free(game);
-	exit(1);
 }

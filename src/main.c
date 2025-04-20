@@ -8,6 +8,18 @@ int	is_map_valid(char **map)
 	return (1);
 }
 
+void	cleanup(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->img->img_wall);
+	mlx_destroy_image(game->mlx, game->img->img_floor);
+	mlx_destroy_image(game->mlx, game->img->img_player);
+	mlx_destroy_image(game->mlx, game->img->img_exit);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx); // only on Linux
+	free(game->mlx);
+}
+
+
 void	run(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -58,8 +70,10 @@ int	main(int argc, char **argv)
 	init_player_position(game);
 	run(game);
 
+	cleanup(game);
 	free_map(game->map->map);
 	free_all(game);
+	exit(1);
 	system("leaks a.out");
 	return (0);
 }

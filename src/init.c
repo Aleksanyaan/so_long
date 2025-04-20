@@ -6,11 +6,29 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:13:20 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/20 15:13:21 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/20 17:38:27 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	line_len(char *filepath)
+{
+	char	*line;
+	int		len;
+	int		fd;
+
+	fd = open(filepath, O_RDONLY);
+	if (fd < 0)
+		exit(1);
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	len = ft_strlen(line);
+	free(line);
+	close(fd);
+	return (len);
+}
 
 int	count_lines(char *filepath)
 {
@@ -21,7 +39,7 @@ int	count_lines(char *filepath)
 	count = 0;
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
-		error_return(1, 0, NULL, 0);
+		exit(1);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -29,7 +47,7 @@ int	count_lines(char *filepath)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close (fd);
+	close(fd);
 	return (count);
 }
 
@@ -41,24 +59,25 @@ char	**read_file_to_array(char *filepath)
 	int		i;
 	int		fd;
 
+	total = count_lines(filepath);
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
-		error_return(1, 0, NULL, 0);
-	total = count_lines(filepath);
-	if (total < 0)
 		return (NULL);
-	lines = malloc((total + 1) * sizeof(int *));
-	if (!lines || fd < 0)
+	lines = malloc((total) * sizeof(char *));
+	if (!lines)
+	{
+		close(fd);
 		return (NULL);
+	}
 	i = 0;
 	line = get_next_line(fd);
-	while (i < total && line != NULL)
+	while (line)
 	{
 		lines[i++] = trim_newline(line);
 		line = get_next_line(fd);
 	}
 	lines[i] = NULL;
-	close (fd);
+	close(fd);
 	return (lines);
 }
 
