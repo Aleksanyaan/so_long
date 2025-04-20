@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:08:26 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/18 15:39:46 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/20 14:41:04 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,4 @@ int	char_count(char **map, char c)
 		i++;
 	}
 	return (count);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	if (!map)
-		return;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }

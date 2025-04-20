@@ -8,11 +8,12 @@
 # include "../libs/libft/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
 
-# define ESC     65307
-# define W       119
-# define A	    97
-# define S	    115
-# define D	    100
+# define TILE_SIZE  64
+# define ESC        65307
+# define W          119
+# define A	        97
+# define S	        115
+# define D	        100
 
 typedef struct s_map
 {
@@ -21,14 +22,23 @@ typedef struct s_map
 	int		y;
     int     height;
     int     width;
-}				t_map;
+}   t_map;
 
 typedef struct s_palyer
 {
 	int		x;
 	int		y;
     char    *standing;
-}				t_player;
+}   t_player;
+
+typedef struct s_img
+{
+    void    *img_player;
+    void    *img_wall;
+    void    *img_floor;
+    void    *img_exit;
+    void    *img_collectible;
+}   t_img;
 
 typedef struct s_game
 {
@@ -37,20 +47,24 @@ typedef struct s_game
 
     t_map       *map;
     t_player    *player;
-
-    void    *img_player;
-    void    *img_wall;
-    void    *img_floor;
-    void    *img_exit;
-    void    *img_collectible;
+    t_img       *img;
 
     int     collectibles;
     int     moves;
 }   t_game;
 
+// free.c
+void	free_map(char **map);
+void    free_all(t_game *game);
 
-//main.c
+// draw.c
 void	draw_map(t_game *game);
+void	draw_tile(t_game *game, void *img, int x, int y);
+void    init_images(t_game *game);
+
+// handle_input.c
+int	handle_input(int keycode, t_game *game);
+int	close_window(t_game *game);
 
 // init.c
 int     count_lines(char *filepath);
@@ -62,7 +76,6 @@ int     check_char(int c);
 void	error_return(int er, int fd, char *temp, char c);
 char	*trim_newline(char *line);
 int     char_count(char **map, char c);
-void	free_map(char **map);
 
 //map_validation.c
 int	    check_rectangular(char **map);
