@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:43:46 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/24 14:02:49 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:10:08 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	close_window(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	// mlx_destroy_window(game->mlx, game->win);
+	cleanup(game);
+	free_map(game->map->map);
+	free_all(game);
 	exit(0);
-	return (0);
 }
 
 int	handle_input(int keycode, t_game *game)

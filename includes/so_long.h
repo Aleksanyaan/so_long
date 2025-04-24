@@ -56,6 +56,7 @@ typedef struct s_game
 // free.c
 void	free_map(char **map);
 void    free_all(t_game *game);
+void	cleanup(t_game *game);
 
 // draw.c
 void	draw_map(t_game *game);

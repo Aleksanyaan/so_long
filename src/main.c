@@ -14,6 +14,7 @@ void	cleanup(t_game *game)
 	mlx_destroy_image(game->mlx, game->img->img_floor);
 	mlx_destroy_image(game->mlx, game->img->img_player);
 	mlx_destroy_image(game->mlx, game->img->img_exit);
+	mlx_destroy_image(game->mlx, game->img->img_collectible);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
@@ -69,12 +70,9 @@ int	main(int argc, char **argv)
 	game->map->width = ft_strlen(game->map->map[0]);
 	init_player_position(game); 
 	run(game);
-	printf("Collectible = %d\n", collectible_count(game));
 
 	cleanup(game);
 	free_map(game->map->map);
 	free_all(game);
-	exit(1);
-	system("leaks a.out");
 	return (0);
 }
