@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:13:20 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/20 17:38:27 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:38:57 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**read_file_to_array(char *filepath)
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	lines = malloc((total) * sizeof(char *));
+	lines = malloc((total + 1) * sizeof(char *));
 	if (!lines)
 	{
 		close(fd);

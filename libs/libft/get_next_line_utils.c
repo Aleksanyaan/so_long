@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 18:58:27 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/17 19:22:32 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:11:18 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,29 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*res;
-	size_t	i;
-	size_t	j;
+// char	*ft_strjoin(char *s1, char *s2)
+// {
+// 	char	*res;
+// 	size_t	i;
+// 	size_t	j;
 
-	i = 0;
-	j = 0;
-	res = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!res)
-		return (free(s1), NULL);
-	while (s1 && s1[i] != 0)
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	while (s2 && s2[j] != 0)
-	{
-		res[i] = s2[j];
-		i++;
-		j++;
-	}
-	res[i] = '\0';
-	free(s1);
-	return (res);
-}
+// 	i = 0;
+// 	j = 0;
+// 	res = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+// 	if (!res)
+// 		return (free(s1), NULL);
+// 	while (s1 && s1[i] != 0)
+// 	{
+// 		res[i] = s1[i];
+// 		i++;
+// 	}
+// 	while (s2 && s2[j] != 0)
+// 	{
+// 		res[i] = s2[j];
+// 		i++;
+// 		j++;
+// 	}
+// 	res[i] = '\0';
+// 	free(s1);
+// 	return (res);
+// }

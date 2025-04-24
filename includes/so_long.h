@@ -65,6 +65,7 @@ void    init_images(t_game *game);
 // handle_input.c
 int	handle_input(int keycode, t_game *game);
 int	close_window(t_game *game);
+void	show_moves(t_game *game);
 
 // init.c
 int     count_lines(char *filepath);
@@ -89,5 +90,9 @@ void	move_left(t_game *game);
 void	move_right(t_game *game);
 void	move_up(t_game *game);
 void	move_down(t_game *game);
+
+// handle_collectibles.c
+int     collectible_count(t_game *game);
+void	move_to(t_game *game, int x_offset, int y_offset);
 
 #endif

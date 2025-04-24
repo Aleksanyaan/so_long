@@ -15,7 +15,7 @@ void	cleanup(t_game *game)
 	mlx_destroy_image(game->mlx, game->img->img_player);
 	mlx_destroy_image(game->mlx, game->img->img_exit);
 	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx); // only on Linux
+	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 }
 
@@ -28,7 +28,7 @@ void	run(t_game *game)
 	init_images(game);
 	draw_map(game);
 	mlx_hook(game->win, 2, 1L << 0, handle_input, game);
-	mlx_hook(game->win, 17, 0, close_window, game); 
+	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
 }
 
@@ -67,8 +67,9 @@ int	main(int argc, char **argv)
 
 	game->map->height = count_lines(argv[1]);
 	game->map->width = ft_strlen(game->map->map[0]);
-	init_player_position(game);
+	init_player_position(game); 
 	run(game);
+	printf("Collectible = %d\n", collectible_count(game));
 
 	cleanup(game);
 	free_map(game->map->map);
