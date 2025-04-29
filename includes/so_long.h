@@ -40,6 +40,16 @@ typedef struct s_img
     void    *img_collectible;
 }   t_img;
 
+typedef struct s_fill
+{
+    char    **map;
+    int     width;
+    int     height;
+    int     collectibles_found;
+    int     exits_found;
+}   t_fill;
+
+
 typedef struct s_game
 {
     void    *mlx;
@@ -85,6 +95,8 @@ int	    check_char_count(char **map);
 int	    check_valid_chars(char **map);
 int	    check_is_map_surrounded_by_walls(char **map);
 
+// valid_path.c
+int     valid_path(t_game *game);
 
 // moves.c
 void	move_left(t_game *game);

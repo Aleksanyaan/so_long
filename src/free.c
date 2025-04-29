@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:09:53 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/20 17:45:04 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:14:29 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	free_map(char **map)
 		return ;
 	i = 0;
 	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
+		free(map[i++]);
 	free(map);
 }
 

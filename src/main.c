@@ -1,9 +1,9 @@
 #include "../includes/so_long.h"
 
-int	is_map_valid(char **map)
+int	is_map_valid(t_game *game)
 {
-	if(!check_valid_chars(map) || !check_char_count(map)
-		|| !check_rectangular(map) || !check_is_map_surrounded_by_walls(map))
+	if(!check_valid_chars(game->map->map) || !check_char_count(game->map->map) || !valid_path(game)
+		|| !check_rectangular(game->map->map) || !check_is_map_surrounded_by_walls(game->map->map))
 		return (0);
 	return (1);
 }
@@ -58,17 +58,20 @@ int	main(int argc, char **argv)
 		printf("Error reading map\n");
 		free_all(game);
 	}
+	
+	game->map->height = count_lines(argv[1]);
+	game->map->width = ft_strlen(game->map->map[0]);
+	game->collectibles = collectible_count(game);
+	init_player_position(game); 
 
-	if (!is_map_valid(game->map->map))
+	if (!is_map_valid(game))
 	{
 		write(1, "Error: Map is not valid!\n", 25);
 		free_map(game->map->map);
 		free_all(game);
+		return (1);
 	}
 
-	game->map->height = count_lines(argv[1]);
-	game->map->width = ft_strlen(game->map->map[0]);
-	init_player_position(game); 
 	run(game);
 
 	cleanup(game);
