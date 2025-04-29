@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:08:41 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/24 17:54:28 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/29 21:36:36 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,17 @@ void	*file_to_img(t_game *game, char *filepath)
 
 void	init_images(t_game *game)
 {
+	// if (game->player->dir == 'L')
+	// 	game->img->img_player = game->img->player_left[game->player->frame];
+	// else if (game->player->dir == 'R')
+	// 	game->img->img_player = game->img->player_right[game->player->frame];
 	game->img->img_wall = file_to_img(game, "textures/wall.xpm");
-	game->img->img_player = file_to_img(game, "textures/player_floor.xpm");
 	game->img->img_collectible = file_to_img(game, "textures/meat_floor.xpm");
 	game->img->img_exit = file_to_img(game, "textures/exit.xpm");
-	game->img->img_floor = file_to_img(game, "textures/floor.xpm");
+	game->img->img_floor = file_to_img(game, "textures/path.xpm");
+	game->img->img_player = file_to_img(game, "textures/player_idle.xpm");
+	
+	//load_player_images(game);
 	if (!game->img->img_wall || !game->img->img_player
 		|| !game->img->img_collectible || !game->img->img_floor
 		|| !game->img->img_exit)

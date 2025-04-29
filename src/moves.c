@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 15:51:42 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/24 13:28:38 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:38:12 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 void	move_left(t_game *game)
 {
+	game->player->dir = 'L';
+	game->player->frame = (game->player->frame + 1) % 4;
 	move_to(game, -1, 0);
 }
 
 void	move_right(t_game *game)
 {
+	game->player->dir = 'R';
+	game->player->frame = (game->player->frame + 1) % 4;
 	move_to(game, 1, 0);
 }
 

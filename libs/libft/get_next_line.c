@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 20:02:38 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/24 17:37:40 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:22:52 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,22 +116,3 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	line = get_next_line(fd);
-// 	printf ("%s", line);
-// 	line = get_next_line(fd);
-// 	printf ("%s", line);
-// 	line = get_next_line(fd);
-// 	printf ("%s", line);
-// 	line = get_next_line(fd);
-// 	printf ("%s", line);
-// 	line = get_next_line(fd);
-// 	printf ("%s", line);
-// 	return (0);
-// }

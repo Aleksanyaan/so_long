@@ -24,20 +24,24 @@ typedef struct s_map
     int     width;
 }   t_map;
 
-typedef struct s_palyer
+typedef struct s_player
 {
-	int		x;
-	int		y;
-    char    *standing;
-}   t_player;
+	int	    x;
+	int	    y;
+	int	    frame;
+	char	dir;
+}	t_player;
+
 
 typedef struct s_img
 {
-    void    *img_player;
     void    *img_wall;
     void    *img_floor;
     void    *img_exit;
     void    *img_collectible;
+    void    *img_player;
+	void	*player_left[4];
+	void	*player_right[4];
 }   t_img;
 
 typedef struct s_fill
@@ -107,5 +111,8 @@ void	move_down(t_game *game);
 // handle_collectibles.c
 int     collectible_count(t_game *game);
 void	move_to(t_game *game, int x_offset, int y_offset);
+
+// handle_player.c
+void	load_player_images(t_game *game);
 
 #endif
