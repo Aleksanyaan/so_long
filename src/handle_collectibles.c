@@ -51,7 +51,6 @@ void	move_to(t_game *game, int x_offset, int y_offset)
 	y = game->player->y;
 	new_x = x + x_offset;
 	new_y = y + y_offset;
-	game->collectibles = collectible_count(game);
 	next_tile = game->map->map[new_y][new_x];
 	if (is_blocked(next_tile, game->collectibles))
 		return ;
@@ -62,6 +61,7 @@ void	move_to(t_game *game, int x_offset, int y_offset)
 	game->player->x = new_x;
 	game->player->y = new_y;
 	game->moves++;
+	load_player_images(game);
 	draw_tile(game, game->img->img_floor, x, y);
 	draw_tile(game, game->img->img_player, new_x, new_y);
 	// show_moves(game);

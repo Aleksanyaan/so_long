@@ -40,8 +40,6 @@ typedef struct s_img
     void    *img_exit;
     void    *img_collectible;
     void    *img_player;
-	void	*player_left[4];
-	void	*player_right[4];
 }   t_img;
 
 typedef struct s_fill
@@ -76,6 +74,7 @@ void	cleanup(t_game *game);
 void	draw_map(t_game *game);
 void	draw_tile(t_game *game, void *img, int x, int y);
 void    init_images(t_game *game);
+void	*file_to_img(t_game *game, char *filepath);
 
 // handle_input.c
 int	handle_input(int keycode, t_game *game);
