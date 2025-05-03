@@ -9,6 +9,10 @@
 # include "../libs/minilibx-linux/mlx.h"
 
 # define TILE_SIZE  64
+# define DIR_RIGHT  0
+# define DIR_LEFT   1
+# define DIR_DOWN   2
+# define DIR_UP     3
 # define ESC        65307
 # define W          119
 # define A	        97
@@ -28,10 +32,15 @@ typedef struct s_player
 {
 	int	    x;
 	int	    y;
-	int	    frame;
 	char	dir;
 }	t_player;
 
+typedef struct s_enemy
+{
+	int	    x;
+	int	    y;
+	int 	dir;
+}	t_enemy;
 
 typedef struct s_img
 {
@@ -40,6 +49,7 @@ typedef struct s_img
     void    *img_exit;
     void    *img_collectible;
     void    *img_player;
+    void    *img_enemy;
 }   t_img;
 
 typedef struct s_fill
@@ -58,16 +68,19 @@ typedef struct s_game
     void    *win;
 
     t_map       *map;
-    t_player    *player;
     t_img       *img;
+    t_player    *player;
+    t_enemy     **enemies;
 
     int     collectibles;
     int     moves;
+    int     enemy_count;
 }   t_game;
 
 // free.c
 void	free_map(char **map);
 void    free_all(t_game *game);
+void	free_enemies(t_game *game);
 void	cleanup(t_game *game);
 
 // draw.c
@@ -108,10 +121,19 @@ void	move_up(t_game *game);
 void	move_down(t_game *game);
 
 // handle_collectibles.c
-int     collectible_count(t_game *game);
-void	move_to(t_game *game, int x_offset, int y_offset);
+int	character_count(t_game *game, char c);
+int     is_blocked(char tile, int collectibles);
+void	handle_collectible(t_game *game, int x, int y);
 
 // handle_player.c
 void	load_player_images(t_game *game);
+void	move_to(t_game *game, int x_offset, int y_offset);
+
+// handle_enemy.c
+void	move_enemy(t_game *game, t_enemy *enemy);
+
+// load_enemy.c
+void	init_enemies(t_game *game);
+void	load_enemy_images(t_game *game, t_enemy *enemy);
 
 #endif

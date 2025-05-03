@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:09:53 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/27 12:14:29 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:35:18 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,31 @@ void	free_map(char **map)
 	free(map);
 }
 
+void	free_enemies(t_game *game)
+{
+	int	i;
+
+	if (!game->enemies)
+		return ;
+	i = 0;
+	while (i < game->enemy_count)
+	{
+		if (game->enemies[i])
+			free(game->enemies[i]);
+		i++;
+	}
+	free(game->enemies);
+	game->enemies = NULL;
+}
+
+
 void	free_all(t_game *game)
 {
+	if (!game)
+		exit (1);
 	free(game->map);
 	free(game->player);
 	free(game->img);
+	free_enemies(game);
 	free(game);
 }

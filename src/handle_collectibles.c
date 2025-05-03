@@ -1,6 +1,6 @@
 #include "../includes/so_long.h"
 
-int	collectible_count(t_game *game)
+int	character_count(t_game *game, char c)
 {
 	int	i;
 	int	j;
@@ -15,7 +15,7 @@ int	collectible_count(t_game *game)
 		j = 0;
 		while (game->map->map[i][j])
 		{
-			if (game->map->map[i][j] == 'C')
+			if (game->map->map[i][j] == c)
 				count++;
 			j++;
 		}
@@ -24,7 +24,7 @@ int	collectible_count(t_game *game)
 	return (count);
 }
 
-static int	is_blocked(char tile, int collectibles)
+int	is_blocked(char tile, int collectibles)
 {
 	if (tile == '1')
 		return (1);
@@ -33,36 +33,8 @@ static int	is_blocked(char tile, int collectibles)
 	return (0);
 }
 
-static void	handle_collectible(t_game *game, int x, int y)
+void	handle_collectible(t_game *game, int x, int y)
 {
 	game->collectibles--;
 	game->map->map[y][x] = '0';
-}
-
-void	move_to(t_game *game, int x_offset, int y_offset)
-{
-	int		x;
-	int		y;
-	int		new_x;
-	int		new_y;
-	char	next_tile;
-
-	x = game->player->x;
-	y = game->player->y;
-	new_x = x + x_offset;
-	new_y = y + y_offset;
-	next_tile = game->map->map[new_y][new_x];
-	if (is_blocked(next_tile, game->collectibles))
-		return ;
-	if (next_tile == 'E')
-		close_window(game);
-	if (next_tile == 'C')
-		handle_collectible(game, new_x, new_y);
-	game->player->x = new_x;
-	game->player->y = new_y;
-	game->moves++;
-	load_player_images(game);
-	draw_tile(game, game->img->img_floor, x, y);
-	draw_tile(game, game->img->img_player, new_x, new_y);
-	// show_moves(game);
 }

@@ -15,11 +15,37 @@ void	cleanup(t_game *game)
 	mlx_destroy_image(game->mlx, game->img->img_player);
 	mlx_destroy_image(game->mlx, game->img->img_exit);
 	mlx_destroy_image(game->mlx, game->img->img_collectible);
+	mlx_destroy_image(game->mlx, game->img->img_enemy);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 }
 
+int	game_loop(t_game *game)
+{
+	int			old_x;
+	int			old_y;
+	int			i;
+	static int frame = 0;
+	i = 0;
+	if (frame++ > 20000)
+	{
+		if (game->enemies)
+		{
+			while (i < game->enemy_count)
+			{
+				old_x = game->enemies[i]->x;
+				old_y = game->enemies[i]->y;
+				move_enemy(game, game->enemies[i]);
+				draw_tile(game, game->img->img_floor, old_x, old_y);
+				draw_tile(game, game->img->img_enemy, game->enemies[i]->x, game->enemies[i]->y);
+				i++;
+			}
+		}
+		frame = 0;
+	}
+	return (0);
+}
 
 void	run(t_game *game)
 {
@@ -28,6 +54,8 @@ void	run(t_game *game)
 
 	init_images(game);
 	draw_map(game);
+	if (game->enemies)
+		mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 2, 1L << 0, handle_input, game);
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
@@ -61,8 +89,9 @@ int	main(int argc, char **argv)
 	
 	game->map->height = count_lines(argv[1]);
 	game->map->width = ft_strlen(game->map->map[0]);
-	game->collectibles = collectible_count(game);
-	init_player_position(game); 
+	game->collectibles = character_count(game, 'C');
+	init_player_position(game);
+	init_enemies(game);
 
 	if (!is_map_valid(game))
 	{

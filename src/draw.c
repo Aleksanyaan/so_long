@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:08:41 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/02 19:07:59 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:41:50 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	draw_tile(t_game *game, void *img, int x, int y)
 {
 	if (!img)
-	{
-		fprintf(stderr, "Error: Tried to draw a NULL image at (%d, %d)\n", x, y);
-		return;
-	}
+		return ;
 	mlx_put_image_to_window(game->mlx, game->win,
 		img, x * TILE_SIZE, y * TILE_SIZE);
 }
@@ -45,6 +42,8 @@ void	draw_map(t_game *game)
 				draw_tile(game, game->img->img_collectible, x, y);
 			else if (game->map->map[y][x] == 'E')
 				draw_tile(game, game->img->img_exit, x, y);
+			else if (game->map->map[y][x] == 'M')
+				draw_tile(game, game->img->img_enemy, x, y);
 			x++;
 		}
 		y++;
@@ -66,7 +65,7 @@ void	init_images(t_game *game)
 	game->img->img_exit = file_to_img(game, "textures/exit.xpm");
 	game->img->img_floor = file_to_img(game, "textures/sand.xpm");
 	game->img->img_player = file_to_img(game, "textures/player_i.xpm");
-	//load_player_images(game);
+	game->img->img_enemy = file_to_img(game, "textures/enemy.xpm");
 	if (!game->img->img_wall || !game->img->img_player
 		|| !game->img->img_collectible || !game->img->img_floor
 		|| !game->img->img_exit)
