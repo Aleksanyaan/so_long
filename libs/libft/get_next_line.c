@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 20:02:38 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/29 12:22:52 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/03 19:56:54 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*set_stash(char *buffer)
 		i++;
 	if (!buffer[i])
 		return (free(buffer), NULL);
-	stash = (char *)malloc((ft_strlen(buffer) - i) * sizeof(char));
+	stash = (char *)malloc((ft_strlen_gnl(buffer) - i) * sizeof(char));
 	if (!stash)
 		return (NULL);
 	j = 0;
@@ -84,7 +84,7 @@ char	*read_file(int fd, char *buffer)
 		line_buffer[bytesread] = '\0';
 		if (bytesread == 0)
 			break ;
-		buffer = ft_strjoin(buffer, line_buffer);
+		buffer = ft_strjoin_gnl(buffer, line_buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}

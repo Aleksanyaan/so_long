@@ -39,5 +39,5 @@ void	move_to(t_game *game, int x_offset, int y_offset)
 	load_player_images(game);
 	draw_tile(game, game->img->img_floor, x, y);
 	draw_tile(game, game->img->img_player, new_x, new_y);
-	// show_moves(game);
+	show_moves(game); 
 }

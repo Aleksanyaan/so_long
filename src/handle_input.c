@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:43:46 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/02 19:12:59 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:00:01 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int	handle_input(int keycode, t_game *game)
 	return (0);
 }
 
-// void	show_moves(t_game *game)
-// {
-// 	char *move_str;
-// 	char *temp;
+void	show_moves(t_game *game)
+{
+	char	*count_str;
+	char	*display_str;
 
-// 	temp = ft_itoa(game->moves);
-// 	move_str = ft_strjoin("Moves: ", temp);
-// 	mlx_string_put(game->mlx, game->win, 20, 20, 0xFFFFFF, move_str);
-// 	free(temp);
-// 	free(move_str);	
-// }
+	count_str = ft_itoa(game->moves);
+	display_str = ft_strjoin("Moves: ", count_str);
+	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFFF, display_str);
+	free(count_str);
+	free(display_str);
+}
