@@ -1,12 +1,13 @@
 #include "../includes/so_long.h"
 
-void    flip_dir(t_enemy *enemy)
+int	get_next_direction()
 {
-    if (enemy->dir == DIR_RIGHT)
-		enemy->dir = DIR_LEFT;
-	else
-		enemy->dir = DIR_RIGHT;
+	static int	counter = 0;
+
+	counter++;
+	return (counter % 4);
 }
+
 
 void	move_enemy(t_game *game, t_enemy *enemy)
 {
@@ -24,7 +25,7 @@ void	move_enemy(t_game *game, t_enemy *enemy)
 	if (new_x < 0 || new_x >= game->map->width
         || new_y < 0 || new_y >= game->map->height)
 	{
-		enemy->dir = rand() % 4;
+		enemy->dir = get_next_direction();
 		return ;
 	}
     if (new_x == game->player->x && new_y == game->player->y)
@@ -44,6 +45,6 @@ void	move_enemy(t_game *game, t_enemy *enemy)
         enemy->y = new_y;
 	}
 	else
-        enemy->dir = rand() % 4;
+        enemy->dir =  get_next_direction();
     load_enemy_images(game, enemy); 
 }

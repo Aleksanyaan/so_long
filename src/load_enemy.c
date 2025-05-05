@@ -37,7 +37,7 @@ void	init_enemies(t_game *game)
                 }
                 game->enemies[i]->x = x;
                 game->enemies[i]->y = y;
-                game->enemies[i]->dir = rand() % 4;
+                game->enemies[i]->dir = get_next_direction();
                 i++;
 			}
             x++;

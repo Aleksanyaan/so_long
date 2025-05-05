@@ -131,6 +131,7 @@ void	move_to(t_game *game, int x_offset, int y_offset);
 
 // handle_enemy.c
 void	move_enemy(t_game *game, t_enemy *enemy);
+int 	get_next_direction();
 
 // load_enemy.c
 void	init_enemies(t_game *game);
