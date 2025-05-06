@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:09:53 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 17:46:49 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:26:26 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	cleanup(t_game *game)
 	mlx_destroy_image(game->mlx, game->img->img_exit);
 	mlx_destroy_image(game->mlx, game->img->img_collectible);
 	mlx_destroy_image(game->mlx, game->img->img_enemy);
+	if (game->img->img_end)
+		mlx_destroy_image(game->mlx, game->img->img_end);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);

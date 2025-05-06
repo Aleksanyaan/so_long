@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:08:41 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 18:11:59 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:55:05 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	init_images(t_game *game)
 	game->img->img_floor = file_to_img(game, "textures/sand.xpm", &w, &h);
 	game->img->img_player = file_to_img(game, "textures/player_i.xpm", &w, &h);
 	game->img->img_enemy = file_to_img(game, "textures/enemy.xpm", &w, &h);
+	game->img->img_end = NULL;
 	if (!game->img->img_wall || !game->img->img_player
 		|| !game->img->img_collectible || !game->img->img_floor
 		|| !game->img->img_exit)

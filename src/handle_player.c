@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:27:11 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:07:08 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 21:14:53 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,9 @@ int	handle_next_tile(t_game *game, int new_x, int new_y)
 	if (is_blocked(next_tile, game->collectibles))
 		return (1);
 	if (next_tile == 'E')
-	{
 		display_end_game(game, "textures/win.xpm");
-		return (1);
-	}
 	else if (next_tile == 'M')
-	{
 		display_end_game(game, "textures/lose.xpm");
-		return (1);
-	}
 	if (next_tile == 'C')
 	{
 		game->collectibles--;
