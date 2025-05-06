@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:13:20 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/03 15:21:36 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:43:06 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ char	**read_file_to_array(char *filepath)
 		return (NULL);
 	lines = malloc((total + 1) * sizeof(char *));
 	if (!lines)
-	{
-		close(fd);
-		return (NULL);
-	}
+		return (close(fd), NULL);
 	i = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -79,27 +76,4 @@ char	**read_file_to_array(char *filepath)
 	lines[i] = NULL;
 	close(fd);
 	return (lines);
-}
-
-void	init_player_position(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	while (game->map->map[i])
-	{
-		j = 0;
-		while (game->map->map[i][j])
-		{
-			if (game->map->map[i][j] == 'P')
-			{
-				game->player->x = j;
-				game->player->y = i;
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:08:41 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/03 20:01:58 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:11:59 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ void	draw_tile(t_game *game, void *img, int x, int y)
 {
 	if (!img)
 		return ;
-	mlx_put_image_to_window(game->mlx, game->win,
-		img, x * TILE_SIZE, y * TILE_SIZE);
+	mlx_put_image_to_window(game->mlx, game->win, img, x * TILE_SIZE, y
+		* TILE_SIZE);
 }
-
 
 void	draw_map(t_game *game)
 {
@@ -50,22 +49,24 @@ void	draw_map(t_game *game)
 	}
 }
 
-void	*file_to_img(t_game *game, char *filepath)
+void	*file_to_img(t_game *game, char *filepath, int *w, int *h)
 {
-	int	size;
-
-	size = TILE_SIZE;
-	return (mlx_xpm_file_to_image(game->mlx, filepath, &size, &size));
+	return (mlx_xpm_file_to_image(game->mlx, filepath, w, h));
 }
 
 void	init_images(t_game *game)
 {
-	game->img->img_wall = file_to_img(game, "textures/wall.xpm");
-	game->img->img_collectible = file_to_img(game, "textures/meat_sand.xpm");
-	game->img->img_exit = file_to_img(game, "textures/exit.xpm");
-	game->img->img_floor = file_to_img(game, "textures/sand.xpm");
-	game->img->img_player = file_to_img(game, "textures/player_i.xpm");
-	game->img->img_enemy = file_to_img(game, "textures/enemy.xpm");
+	int	w;
+	int	h;
+
+	w = TILE_SIZE;
+	h = TILE_SIZE;
+	game->img->img_wall = file_to_img(game, "textures/wall.xpm", &w, &h);
+	game->img->img_collectible = file_to_img(game, "textures/meat.xpm", &w, &h);
+	game->img->img_exit = file_to_img(game, "textures/exit.xpm", &w, &h);
+	game->img->img_floor = file_to_img(game, "textures/sand.xpm", &w, &h);
+	game->img->img_player = file_to_img(game, "textures/player_i.xpm", &w, &h);
+	game->img->img_enemy = file_to_img(game, "textures/enemy.xpm", &w, &h);
 	if (!game->img->img_wall || !game->img->img_player
 		|| !game->img->img_collectible || !game->img->img_floor
 		|| !game->img->img_exit)

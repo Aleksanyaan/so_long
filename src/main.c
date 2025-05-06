@@ -2,23 +2,21 @@
 
 int	is_map_valid(t_game *game)
 {
-	if(!check_valid_chars(game->map->map) || !check_char_count(game->map->map) || !valid_path(game)
-		|| !check_rectangular(game->map->map) || !check_is_map_surrounded_by_walls(game->map->map))
+	if (!check_valid_chars(game->map->map) || !check_char_count(game->map->map)
+		|| !valid_path(game) || !check_rectangular(game->map->map)
+		|| !check_is_map_surrounded_by_walls(game->map->map))
 		return (0);
 	return (1);
 }
 
-void	cleanup(t_game *game)
+int	is_ber_file(char *filename)
 {
-	mlx_destroy_image(game->mlx, game->img->img_wall);
-	mlx_destroy_image(game->mlx, game->img->img_floor);
-	mlx_destroy_image(game->mlx, game->img->img_player);
-	mlx_destroy_image(game->mlx, game->img->img_exit);
-	mlx_destroy_image(game->mlx, game->img->img_collectible);
-	mlx_destroy_image(game->mlx, game->img->img_enemy);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	int	len;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
 }
 
 int	game_loop(t_game *game)
@@ -26,7 +24,10 @@ int	game_loop(t_game *game)
 	int			old_x;
 	int			old_y;
 	int			i;
-	static int frame = 0;
+	static int	frame = 0;
+
+	if (game->game_over)
+		return (0);
 	i = 0;
 	if (frame++ > 20000)
 	{
@@ -38,7 +39,8 @@ int	game_loop(t_game *game)
 				old_y = game->enemies[i]->y;
 				move_enemy(game, game->enemies[i]);
 				draw_tile(game, game->img->img_floor, old_x, old_y);
-				draw_tile(game, game->img->img_enemy, game->enemies[i]->x, game->enemies[i]->y);
+				draw_tile(game, game->img->img_enemy, game->enemies[i]->x,
+					game->enemies[i]->y);
 				i++;
 			}
 		}
@@ -50,8 +52,10 @@ int	game_loop(t_game *game)
 void	run(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->map->width * TILE_SIZE, game->map->height * TILE_SIZE, "so_long");
-
+	game->win = mlx_new_window(game->mlx, game->map->width * TILE_SIZE,
+			game->map->height * TILE_SIZE, "so_long");
+	if (game->game_over)
+		return ;
 	init_images(game);
 	draw_map(game);
 	if (game->enemies)
@@ -65,34 +69,31 @@ int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	if (argc != 2)
+	if (argc != 2 || !is_ber_file(argv[1]))
 	{
-		printf("Usage: %s <map.ber>\n", argv[0]);
+		write(1, "Error: Enter a .ber file!\n", 32);
 		return (1);
 	}
 	game = malloc(sizeof(t_game));
 	if (!game)
-		exit (1);
-	game->moves = 0;
+		exit(1);
 	game->map = malloc(sizeof(t_map));
 	game->player = malloc(sizeof(t_player));
 	game->img = malloc(sizeof(t_img));
 	if (!game->map || !game->player || !game->img)
 		free_all(game);
 	game->map->map = read_file_to_array(argv[1]);
-	
 	if (!game->map->map)
 	{
 		printf("Error reading map\n");
 		free_all(game);
 	}
-	
+	game->moves = 0;
 	game->map->height = count_lines(argv[1]);
 	game->map->width = ft_strlen(game->map->map[0]);
 	game->collectibles = character_count(game, 'C');
 	init_player_position(game);
 	init_enemies(game);
-
 	if (!is_map_valid(game))
 	{
 		write(1, "Error: Map is not valid!\n", 25);
@@ -100,9 +101,7 @@ int	main(int argc, char **argv)
 		free_all(game);
 		return (1);
 	}
-
 	run(game);
-
 	cleanup(game);
 	free_map(game->map->map);
 	free_all(game);

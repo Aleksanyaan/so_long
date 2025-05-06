@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_path.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 17:41:35 by zaleksan          #+#    #+#             */
+/*   Updated: 2025/05/06 17:41:36 by zaleksan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 char	**copy_map(char **map, int height)
@@ -32,7 +44,8 @@ void	flood_fill(t_fill *fill, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= fill->height || y >= fill->width)
 		return ;
-	if (fill->map[x][y] == '1' || fill->map[x][y] == 'V' || fill->map[x][y] == 'M')
+	if (fill->map[x][y] == '1' || fill->map[x][y] == 'V'
+		|| fill->map[x][y] == 'M')
 		return ;
 	if (fill->map[x][y] == 'C')
 		fill->collectibles_found++;
@@ -42,7 +55,6 @@ void	flood_fill(t_fill *fill, int x, int y)
 		return ;
 	}
 	fill->map[x][y] = 'V';
-
 	flood_fill(fill, x + 1, y);
 	flood_fill(fill, x - 1, y);
 	flood_fill(fill, x, y + 1);
@@ -62,17 +74,16 @@ int	valid_path(t_game *game)
 	fill.height = game->map->height;
 	fill.collectibles_found = 0;
 	fill.exits_found = 0;
-    if (game->player->x < 0 || game->player->y < 0
-            || game->player->x >= game->map->width
-            || game->player->y >= game->map->height)
-    {
-        free_map(map_copy);
-        return (0);
-    }    
+	if (game->player->x < 0 || game->player->y < 0
+		|| game->player->x >= game->map->width
+		|| game->player->y >= game->map->height)
+	{
+		free_map(map_copy);
+		return (0);
+	}
 	flood_fill(&fill, game->player->y, game->player->x);
 	free_map(map_copy);
-	if (fill.collectibles_found != game->collectibles
-		|| fill.exits_found == 0)
+	if (fill.collectibles_found != game->collectibles || fill.exits_found == 0)
 		return (0);
 	return (1);
 }
