@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:43:46 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 17:39:56 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:10:07 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ int	close_window(t_game *game)
 	free_map(game->map->map);
 	free_all(game);
 	exit(0);
+}
+
+int	is_blocked(char tile, int collectibles)
+{
+	if (tile == '1')
+		return (1);
+	if (tile == 'E' && collectibles > 0)
+		return (1);
+	return (0);
 }
 
 int	handle_input(int keycode, t_game *game)

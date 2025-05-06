@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:27:11 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 19:40:21 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:07:08 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ int	handle_next_tile(t_game *game, int new_x, int new_y)
 		return (1);
 	}
 	if (next_tile == 'C')
-		handle_collectible(game, new_x, new_y);
+	{
+		game->collectibles--;
+		game->map->map[new_y][new_x] = '0';
+	}
 	return (0);
 }
 

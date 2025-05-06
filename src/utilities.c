@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:08:26 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/03 13:34:50 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:04:15 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,30 @@ int	char_count(char **map, char c)
 			{
 				count++;
 			}
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+int	character_count(t_game *game, char c)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	if (!game || !game->map || !game->map->map)
+		return (0);
+	i = 0;
+	count = 0;
+	while (game->map->map[i])
+	{
+		j = 0;
+		while (game->map->map[i][j])
+		{
+			if (game->map->map[i][j] == c)
+				count++;
 			j++;
 		}
 		i++;

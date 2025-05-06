@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:46:01 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 19:27:23 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:21:18 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,15 @@ typedef struct s_game
 	int			game_over;
 }				t_game;
 
+// is_valid.c
+int				is_map_valid(t_game *game);
+int				is_ber_file(char *filename);
+
+// init_game.c
+void			init_game(t_game *game);
+void			init_map(t_game *game, char *map);
+void			init_game_params(t_game *game, char *map);
+
 // free.c
 void			free_map(char **map);
 void			free_all(t_game *game);
@@ -103,21 +112,23 @@ void			draw_map(t_game *game);
 void			draw_tile(t_game *game, void *img, int x, int y);
 void			init_images(t_game *game);
 void			*file_to_img(t_game *game, char *filepath, int *w, int *h);
+
 // handle_input.c
 int				handle_input(int keycode, t_game *game);
 int				close_window(t_game *game);
+int				is_blocked(char tile, int collectibles);
 void			show_moves(t_game *game);
 
-// init.c
+// init_map.c
 int				count_lines(char *filepath);
 char			**read_file_to_array(char *filepath);
 void			init_player_position(t_game *game);
 
 // utilities.c
 int				check_char(int c);
-void			error_return(int er, int fd, char *temp, char c);
 char			*trim_newline(char *line);
 int				char_count(char **map, char c);
+int				character_count(t_game *game, char c);
 
 // map_validation.c
 int				check_rectangular(char **map);
@@ -134,11 +145,6 @@ void			move_right(t_game *game);
 void			move_up(t_game *game);
 void			move_down(t_game *game);
 
-// handle_collectibles.c
-int				character_count(t_game *game, char c);
-int				is_blocked(char tile, int collectibles);
-void			handle_collectible(t_game *game, int x, int y);
-
 // handle_player.c
 void			load_player_images(t_game *game);
 void			move_to(t_game *game, int x_offset, int y_offset);
@@ -153,4 +159,7 @@ void			load_enemy_images(t_game *game, t_enemy *enemy);
 
 // end_window.c
 void			display_end_game(t_game *game, char *image_path);
+
+// run_game.c
+void			run(t_game *game);
 #endif

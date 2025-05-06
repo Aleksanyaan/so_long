@@ -1,69 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 20:22:37 by zaleksan          #+#    #+#             */
+/*   Updated: 2025/05/06 20:22:38 by zaleksan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
-
-int	is_map_valid(t_game *game)
-{
-	if (!check_valid_chars(game->map->map) || !check_char_count(game->map->map)
-		|| !valid_path(game) || !check_rectangular(game->map->map)
-		|| !check_is_map_surrounded_by_walls(game->map->map))
-		return (0);
-	return (1);
-}
-
-int	is_ber_file(char *filename)
-{
-	int	len;
-
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (0);
-	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
-}
-
-int	game_loop(t_game *game)
-{
-	int			old_x;
-	int			old_y;
-	int			i;
-	static int	frame = 0;
-
-	if (game->game_over)
-		return (0);
-	i = 0;
-	if (frame++ > 20000)
-	{
-		if (game->enemies)
-		{
-			while (i < game->enemy_count)
-			{
-				old_x = game->enemies[i]->x;
-				old_y = game->enemies[i]->y;
-				move_enemy(game, game->enemies[i]);
-				draw_tile(game, game->img->img_floor, old_x, old_y);
-				draw_tile(game, game->img->img_enemy, game->enemies[i]->x,
-					game->enemies[i]->y);
-				i++;
-			}
-		}
-		frame = 0;
-	}
-	return (0);
-}
-
-void	run(t_game *game)
-{
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->map->width * TILE_SIZE,
-			game->map->height * TILE_SIZE, "so_long");
-	if (game->game_over)
-		return ;
-	init_images(game);
-	draw_map(game);
-	if (game->enemies)
-		mlx_loop_hook(game->mlx, game_loop, game);
-	mlx_hook(game->win, 2, 1L << 0, handle_input, game);
-	mlx_hook(game->win, 17, 0, close_window, game);
-	mlx_loop(game->mlx);
-}
 
 int	main(int argc, char **argv)
 {
@@ -77,23 +24,9 @@ int	main(int argc, char **argv)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		exit(1);
-	game->map = malloc(sizeof(t_map));
-	game->player = malloc(sizeof(t_player));
-	game->img = malloc(sizeof(t_img));
-	if (!game->map || !game->player || !game->img)
-		free_all(game);
-	game->map->map = read_file_to_array(argv[1]);
-	if (!game->map->map)
-	{
-		printf("Error reading map\n");
-		free_all(game);
-	}
-	game->moves = 0;
-	game->map->height = count_lines(argv[1]);
-	game->map->width = ft_strlen(game->map->map[0]);
-	game->collectibles = character_count(game, 'C');
-	init_player_position(game);
-	init_enemies(game);
+	init_game(game);
+	init_map(game, argv[1]);
+	init_game_params(game, argv[1]);
 	if (!is_map_valid(game))
 	{
 		write(1, "Error: Map is not valid!\n", 25);
@@ -102,8 +35,5 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	run(game);
-	cleanup(game);
-	free_map(game->map->map);
-	free_all(game);
-	return (0);
+	close_window(game);
 }
