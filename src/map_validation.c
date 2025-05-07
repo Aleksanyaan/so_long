@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:13:41 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/04/20 15:13:42 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:05:44 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_valid_chars(char **map)
 int	check_char_count(char **map)
 {
 	if (char_count(map, 'E') != 1 || char_count(map, 'P') != 1
-		|| char_count(map, 'C') < 1)
+		|| char_count(map, 'C') < 1 || char_count(map, 'M') > 8)
 		return (0);
 	return (1);
 }
