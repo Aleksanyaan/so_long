@@ -14,7 +14,7 @@ HEADER		= ./includes/so_long.h
 
 CC			= cc
 
-FLAGS		= -g -Wall -Wextra -Werror #-g3 -fsanitize=address
+FLAGS		= -Wall -Wextra -Werror
 
 SRC_DIR		= ./src
 
@@ -39,7 +39,7 @@ minilibx:
 	make -C $(MLX_DIR)
 
 build:
-	mkdir -p ${BUILD_DIR}/so_long
+	mkdir -p ${BUILD_DIR}
 
 clean:
 	rm -rf $(BUILD_DIR)
