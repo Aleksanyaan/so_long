@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 15:13:20 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 19:43:06 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:05:22 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	**read_file_to_array(char *filepath)
 		return (close(fd), NULL);
 	i = 0;
 	line = get_next_line(fd);
+	if (!line)
+		return (free(lines), NULL);
 	while (line)
 	{
 		lines[i++] = trim_newline(line);

@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:22:29 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:22:30 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:23:49 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	game_loop(t_game *game)
 	int			i;
 	static int	frame = 0;
 
-	if (game->game_over)
-		return (0);
 	i = 0;
 	if (frame++ > 20000)
 	{
@@ -38,6 +36,8 @@ int	game_loop(t_game *game)
 				old_x = game->enemies[i]->x;
 				old_y = game->enemies[i]->y;
 				move_enemy(game, game->enemies[i]);
+				if (game->game_over)
+					break ;
 				draw_after_move(game, old_x, old_y, i);
 				i++;
 			}

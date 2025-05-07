@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:19:50 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:33:48 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:01:32 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	load_enemy_images(t_game *game, t_enemy *enemy)
 
 	w = TILE_SIZE;
 	h = TILE_SIZE;
-	if (!game->enemies)
+	if (!game->enemies || game->game_over)
 		return ;
 	if (game->img->img_enemy)
 		mlx_destroy_image(game->mlx, game->img->img_enemy);

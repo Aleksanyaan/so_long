@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:39:46 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 19:59:10 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:55:52 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	update_enemy_position(t_game *game, t_enemy *enemy, int new_x,
 {
 	char	next_tile;
 
+	if (game->game_over)
+		return ;
 	if (new_x == game->player->x && new_y == game->player->y)
 	{
-		write(1, "Caught by enemy!\n", 17);
-		close_window(game);
+		game->game_over = 1;
+		display_end_game(game, "textures/lose.xpm");
 	}
 	next_tile = game->map->map[new_y][new_x];
 	if (next_tile == '0')
@@ -59,7 +61,7 @@ void	move_enemy(t_game *game, t_enemy *enemy)
 	int	new_x;
 	int	new_y;
 
-	if (!game->enemies)
+	if (!game->enemies || game->game_over)
 		return ;
 	new_x = enemy->x;
 	new_y = enemy->y;

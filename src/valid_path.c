@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:41:35 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 17:41:36 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:45:25 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	flood_fill(t_fill *fill, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= fill->height || y >= fill->width)
 		return ;
-	if (fill->map[x][y] == '1' || fill->map[x][y] == 'V'
-		|| fill->map[x][y] == 'M')
+	if (fill->map[x][y] == '1' || fill->map[x][y] == 'V')
 		return ;
 	if (fill->map[x][y] == 'C')
 		fill->collectibles_found++;

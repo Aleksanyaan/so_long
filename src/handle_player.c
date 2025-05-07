@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:27:11 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 21:14:53 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:07:49 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	move_to(t_game *game, int x_offset, int y_offset)
 	y = game->player->y;
 	new_x = x + x_offset;
 	new_y = y + y_offset;
-	if (handle_next_tile(game, new_x, new_y))
+	if (handle_next_tile(game, new_x, new_y) || game->game_over)
 		return ;
 	game->player->x = new_x;
 	game->player->y = new_y;

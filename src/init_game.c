@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:02:17 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/06 20:50:19 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:07:58 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_map(t_game *game, char *map)
 	{
 		write(1, "Error reading map\n", 18);
 		free_all(game);
+		exit(1);
 	}
 }
 
