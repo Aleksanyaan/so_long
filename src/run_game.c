@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 20:22:29 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/07 20:23:49 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/09 13:13:56 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	game_loop(t_game *game)
 	static int	frame = 0;
 
 	i = 0;
-	if (frame++ > 20000)
+	if (frame++ > 40000)
 	{
 		if (game->enemies)
 		{

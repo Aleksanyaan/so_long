@@ -6,7 +6,7 @@
 /*   By: zaleksan <zaleksan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 20:02:38 by zaleksan          #+#    #+#             */
-/*   Updated: 2025/05/03 19:56:54 by zaleksan         ###   ########.fr       */
+/*   Updated: 2025/05/09 13:17:51 by zaleksan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (free(buffer), NULL);
-	// if ((fd != 0 && fd <= 2) || BUFFER_SIZE <= 0)
-	// 	return (NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
