@@ -18,10 +18,10 @@ FLAGS		= -Wall -Wextra -Werror
 
 SRC_DIR		= ./src
 
-SRC			= src/main.c src/draw.c src/end_window.c src/free.c src/handle_enemy.c \
-				src/handle_input.c src/handle_player.c src/init_game.c src/init_map.c \
-				src/is_valid.c src/load_enemy.c src/map_validation.c src/moves.c \
-				src/run_game.c src/utilities.c src/valid_path.c
+SRC			= $(SRC_DIR)/main.c $(SRC_DIR)/draw.c $(SRC_DIR)/end_window.c $(SRC_DIR)/free.c $(SRC_DIR)/handle_enemy.c \
+				$(SRC_DIR)/handle_input.c $(SRC_DIR)/handle_player.c $(SRC_DIR)/init_game.c $(SRC_DIR)/init_map.c \
+				$(SRC_DIR)/is_valid.c $(SRC_DIR)/load_enemy.c $(SRC_DIR)/map_validation.c $(SRC_DIR)/moves.c \
+				$(SRC_DIR)/run_game.c $(SRC_DIR)/utilities.c $(SRC_DIR)/valid_path.c
 
 OBJ			= $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
 
@@ -54,6 +54,5 @@ fclean: clean
 	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
-	make -C $(LIBFT_DIR) re
 
 .PHONY:	all fclean clean re lib build minilibx
